@@ -4,15 +4,17 @@ import comment_icon from "../../components/images/speech-bubble.png";
 import Ask_question from "../../components/images/question-mark.png";
 import leaderboard from "../../components/images/podium.png";
 import CourseMaterial from "./CourseMaterial";
+import Topics from "./Topics";
+import { Comments } from "./Comments";
 
 export default function CourseDetails() {
   return (
     <>
-      <div className="flex gap-10">
-        <div >
+      <div className="flex gap-10 px-2">
+        <div className="flex-1">
                  <div>
           <iframe 
-            width="729" 
+  className="w-full"
             height="410" 
             src="https://www.youtube.com/embed/WYSt5e7fLWU" 
             title="Frontend Performance - #1 Introduction بالعربي" 
@@ -60,11 +62,14 @@ export default function CourseDetails() {
         </div>
 
         <CourseMaterial/>
+        <Comments/>
+        
 
         </div>
 
         {/* second column */}
-        <div>
+        <div className="flex-1">
+            <Topics/>
 
         </div>
    
