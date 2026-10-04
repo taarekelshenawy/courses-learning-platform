@@ -3,12 +3,14 @@ import Curriculum_icon from "../../components/images/cv.png";
 import comment_icon from "../../components/images/speech-bubble.png";
 import Ask_question from "../../components/images/question-mark.png";
 import leaderboard from "../../components/images/podium.png";
+import CourseMaterial from "./CourseMaterial";
 
 export default function CourseDetails() {
   return (
     <>
-      <div>
-        <div>
+      <div className="flex gap-10">
+        <div >
+                 <div>
           <iframe 
             width="729" 
             height="410" 
@@ -56,6 +58,17 @@ export default function CourseDetails() {
             </li>
           </ul>
         </div>
+
+        <CourseMaterial/>
+
+        </div>
+
+        {/* second column */}
+        <div>
+
+        </div>
+   
+        
       </div>
     </>
   );
