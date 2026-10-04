@@ -17,7 +17,7 @@ export default function page() {
           </h1>
         </div>
       </div>
-      <main>
+      <main className="mt-6 mx-6">
         <CourseDetails />
       </main>
     </div>
