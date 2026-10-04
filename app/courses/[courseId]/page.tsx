@@ -18,9 +18,9 @@ export default function page() {
           </h1>
         </div>
       </div>
-      <main className="mt-6 mx-6 max-sm:mx-0 flex lg:flex-row gap-10 px-2  max-sm:flex-col sm:flex-col">
+      <main className="mt-6 mx-6 max-sm:mx-0 flex lg:flex-row gap-10   max-sm:flex-col sm:flex-col">
         <CoursePlayer />
-           <div className="hidden md:block  ">
+           <div className="hidden md:block px-2">
             <Topics />
           </div>  
       </main>

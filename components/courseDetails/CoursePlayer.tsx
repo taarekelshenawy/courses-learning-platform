@@ -12,7 +12,7 @@ export default function CoursePlayer() {
     <>
       <div className="flex lg:flex-row gap-10  max-sm:flex-col sm:flex-col max-sm:mt-24">
         <div >
-                 <div className="max-sm:sticky top-28">
+                 <div className="max-sm:sticky top-0">
           <iframe 
   className="w-full max-sm:h-64"
             height="410" 
@@ -62,7 +62,7 @@ export default function CoursePlayer() {
         </div>
 
         <CourseMaterial/>
-           <div className="block md:hidden mt-5 ">
+           <div className="block md:hidden mt-5 px-2 ">
         <Topics />
       </div>
       <Comments />
