@@ -7,14 +7,14 @@ import CourseMaterial from "./CourseMaterial";
 import Topics from "./Topics";
 import { Comments } from "./Comments";
 
-export default function CourseDetails() {
+export default function CoursePlayer() {
   return (
     <>
-      <div className="flex gap-10 px-2">
-        <div className="flex-1">
-                 <div>
+      <div className="flex lg:flex-row gap-10  max-sm:flex-col sm:flex-col max-sm:mt-24">
+        <div >
+                 <div className="max-sm:sticky top-28">
           <iframe 
-  className="w-full"
+  className="w-full max-sm:h-64"
             height="410" 
             src="https://www.youtube.com/embed/WYSt5e7fLWU" 
             title="Frontend Performance - #1 Introduction بالعربي" 
@@ -62,16 +62,15 @@ export default function CourseDetails() {
         </div>
 
         <CourseMaterial/>
-        <Comments/>
-        
+           <div className="block md:hidden mt-5 ">
+        <Topics />
+      </div>
+      <Comments />
+      
 
         </div>
 
-        {/* second column */}
-        <div className="flex-1">
-            <Topics/>
-
-        </div>
+       
    
         
       </div>
