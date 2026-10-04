@@ -7,7 +7,8 @@ export default function Topics() {
   const weeks = [
     {
       weekNumber: 1,
-      description: "Advanced storytelling techniques for writers: Personas, Characters & Plots",
+      description:
+        "Advanced storytelling techniques for writers: Personas, Characters & Plots",
       lessons: [
         { id: 1, title: "Introduction", hasMeta: false },
         { id: 2, title: "Course Review", hasMeta: false },
@@ -30,34 +31,33 @@ export default function Topics() {
   ];
 
   return (
-    <div >
+    <div>
       {/* عنوان القسم */}
       <div className="mb-16">
-        <h1 className="font-bold text-xl">Topics for this course</h1>
+        <h1 className="text-xl font-bold">Topics for this course</h1>
       </div>
 
       {/* شريط التقدم (ثابت كمظهر) */}
-      <div className="w-full bg-gray-200 h-2 rounded-full mb-6">
-        <div className="bg-green-500 h-2 rounded-full w-1/3"></div>
+      <div className="mb-6 h-2 w-full rounded-full bg-gray-200">
+        <div className="h-2 w-1/3 rounded-full bg-green-500"></div>
       </div>
 
       {/* عرض الأسابيع والدروس */}
       {weeks.map((week) => (
         <div
           key={week.weekNumber}
-          className="mt-3 border border-gray-300 p-5 rounded-xl shadow-sm mb-6"
+          className="mt-3 mb-6 rounded-xl border border-gray-300 p-5 shadow-sm"
         >
           <div className="mb-3">
-            <p className="font-bold text-2xl">Week {week.weekNumber}</p>
-            <p className="text-gray-400 text-sm">{week.description}</p>
+            <p className="text-2xl font-bold">Week {week.weekNumber}</p>
+            <p className="text-sm text-gray-400">{week.description}</p>
           </div>
           <hr className="text-gray-300" />
 
           <div className="text-gray-600">
             {week.lessons.map((lesson, i) => (
               <div key={lesson.id}>
-                <div className="flex justify-between items-center mt-3 mb-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                  
+                <div className="mt-3 mb-2 flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-gray-100">
                   {/* عنوان الدرس مع الأيقونة */}
                   <div className="flex items-center gap-2">
                     <LuStickyNote className="text-gray-500" />
@@ -67,17 +67,16 @@ export default function Topics() {
                   {/* الـ Badges (أسئلة ووقته) أو القفل */}
                   {lesson.hasMeta ? (
                     <div className="flex gap-2">
-                      <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold cursor-pointer">
+                      <span className="cursor-pointer rounded bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
                         0 Question
                       </span>
-                      <span className="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-semibold">
+                      <span className="rounded bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
                         10 Minutes
                       </span>
                     </div>
                   ) : (
-                    <GiDialPadlock className="text-gray-400 text-lg" />
+                    <GiDialPadlock className="text-lg text-gray-400" />
                   )}
-
                 </div>
                 <hr className="text-gray-200" />
               </div>

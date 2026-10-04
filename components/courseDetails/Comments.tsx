@@ -30,17 +30,19 @@ const commentsData = [
 
 export const Comments = () => {
   return (
-    <div className="mt-12 px-6 flex flex-col gap-8 commentpage bg-[#F5F9FA] py-10 rounded-2xl">
-  
-      <h1 className="font-bold text-4xl text-gray-800 mb-4">Comments</h1>
+    <div className="commentpage mt-12 flex flex-col gap-8 rounded-2xl bg-[#F5F9FA] px-6 py-10">
+      <h1 className="mb-4 text-4xl font-bold text-gray-800">Comments</h1>
 
       <div className="flex flex-col gap-8">
         {commentsData.map(({ id, name, date, text, image }) => (
-          <div key={id} className="flex gap-6 bg-white p-5 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
+          <div
+            key={id}
+            className="flex gap-6 rounded-2xl bg-white p-5 shadow-md transition-shadow hover:shadow-lg"
+          >
             <Image
               src={image}
               alt={`${name} comment`}
-              className="w-20 h-20 rounded-full object-cover"
+              className="h-20 w-20 rounded-full object-cover"
             />
             <div className="text-gray-700">
               <div className="mb-3">
@@ -57,15 +59,10 @@ export const Comments = () => {
         <textarea
           rows={6}
           placeholder="Write your comment..."
-          className="w-full max-w-3xl p-4 rounded-xl bg-white border border-gray-200 
-                     shadow-[0_0_10px_rgba(0,0,0,0.05)] focus:outline-none 
-                     focus:ring-2 focus:ring-green-500 transition-all"
+          className="w-full max-w-3xl rounded-xl border border-gray-200 bg-white p-4 shadow-[0_0_10px_rgba(0,0,0,0.05)] transition-all focus:ring-2 focus:ring-green-500 focus:outline-none"
         ></textarea>
 
-        <button
-          className="w-48 py-3 rounded bg-[#0B9586] text-white text-lg font-semibold 
-                     hover:bg-[#0B9586] transition-colors shadow-md"
-        >
+        <button className="w-48 rounded bg-[#0B9586] py-3 text-lg font-semibold text-white shadow-md transition-colors hover:bg-[#0B9586]">
           Submit Review
         </button>
       </div>

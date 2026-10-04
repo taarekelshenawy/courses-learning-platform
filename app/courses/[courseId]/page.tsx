@@ -1,10 +1,10 @@
-import CoursePlayer from "@/components/courseDetails/CoursePlayer";
+import CourseDetails from "@/components/courseDetails/CourseDetails";
 import BreadCrumb from "@/shared/BreadCrumb";
-import Topics from "@/components/courseDetails/Topics";
+
 export default function page() {
   return (
     <div>
-      <div className="bg-custom-bg px-5 py-3 max-sm:fixed top-0  w-full max-sm:h-28 ">
+      <div className="bg-custom-bg top-0 w-full px-5 py-3 max-sm:fixed max-sm:h-28">
         <BreadCrumb
           breadcrumbData={[
             { title: "Home", label: "/" },
@@ -18,11 +18,8 @@ export default function page() {
           </h1>
         </div>
       </div>
-      <main className="mt-6 mx-6 max-sm:mx-0 flex lg:flex-row gap-10   max-sm:flex-col sm:flex-col">
-        <CoursePlayer />
-           <div className="hidden md:block px-2">
-            <Topics />
-          </div>  
+      <main className="mx-6 mt-6 flex gap-10 max-sm:mx-0 max-sm:flex-col sm:flex-col lg:flex-row">
+        <CourseDetails />
       </main>
     </div>
   );
