@@ -59,6 +59,8 @@ export default function CourseDetails() {
   const [course, setCourse] = useState<Course[]>([]);
   const { courseId } = useParams();
 
+  const [videoUpdated, setVideoUpdated] = useState("");
+
   useEffect(() => {
     const courseInfo = coursesData.filter((item) => item.id === courseId);
     setCourse(courseInfo);
@@ -74,7 +76,11 @@ export default function CourseDetails() {
             <iframe
               className="w-full max-sm:h-64"
               height="410"
-              src={course[0]?.weeks[0]?.items[0]?.videoUrl}
+              src={
+                videoUpdated
+                  ? videoUpdated
+                  : course[0]?.weeks[0]?.items[0]?.videoUrl
+              }
               title="Frontend Performance - #1 Introduction بالعربي"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -126,7 +132,7 @@ export default function CourseDetails() {
           <Comments />
         </div>
         <div className="hidden px-2 lg:block">
-          <Topics weeksInfo={course[0]?.weeks} />
+          <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} />
         </div>
       </div>
     </>

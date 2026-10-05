@@ -47,36 +47,10 @@ export interface Course {
 }
 
 interface TopicsProps {
-  weeksInfo: Week[]; // لاحظ وجود الأقواس [] لأنها مصفوفة
+  weeksInfo: Week[];
+  setVideo: (url: string) => void;
 }
-export default function Topics({ weeksInfo }: TopicsProps) {
-  // // بيانات تجريبية ثابتة للعرض فقط
-  // const weeks = [
-  //   {
-  //     weekNumber: 1,
-  //     description:
-  //       "Advanced storytelling techniques for writers: Personas, Characters & Plots",
-  //     lessons: [
-  //       { id: 1, title: "Introduction", hasMeta: false },
-  //       { id: 2, title: "Course Review", hasMeta: false },
-  //       { id: 3, title: "Course Review", hasMeta: true }, // دي اللي عليها تفاصيل الأسئلة والوقت
-  //       { id: 4, title: "Course Exercise / Reference Files", hasMeta: false },
-  //       { id: 5, title: "Code Editor Installation", hasMeta: false },
-  //     ],
-  //   },
-  //   {
-  //     weekNumber: 2,
-  //     description: "Core programming concepts and syntax fundamentals",
-  //     lessons: [
-  //       { id: 6, title: "Defining Functions", hasMeta: false },
-  //       { id: 7, title: "Function Parameters", hasMeta: false },
-  //       { id: 8, title: "Return values from function", hasMeta: true },
-  //       { id: 9, title: "Global variable and Scope", hasMeta: false },
-  //       { id: 10, title: "Newer way of creating a Constant", hasMeta: false },
-  //     ],
-  //   },
-  // ];
-
+export default function Topics({ weeksInfo, setVideo }: TopicsProps) {
   return (
     <div>
       {/* عنوان القسم */}
@@ -108,7 +82,12 @@ export default function Topics({ weeksInfo }: TopicsProps) {
                   {/* عنوان الدرس مع الأيقونة */}
                   <div className="flex items-center gap-2">
                     <LuStickyNote className="text-gray-500" />
-                    <span className="text-sm font-medium">{lesson.title}</span>
+                    <span
+                      className="cursor-pointer text-sm font-medium"
+                      onClick={() => setVideo(lesson.videoUrl || "")}
+                    >
+                      {lesson.title}
+                    </span>
                   </div>
 
                   {/* الـ Badges (أسئلة ووقته) أو القفل */}
