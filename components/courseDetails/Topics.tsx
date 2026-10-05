@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { GiDialPadlock } from "react-icons/gi";
 import { LuStickyNote } from "react-icons/lu";
+import QuestionModal from "./QuestionModal";
 
 export type ItemType = "lesson" | "pdf" | "exam";
 
@@ -51,6 +52,7 @@ interface TopicsProps {
   setVideo: (url: string) => void;
 }
 export default function Topics({ weeksInfo, setVideo }: TopicsProps) {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div>
       {/* عنوان القسم */}
@@ -92,9 +94,12 @@ export default function Topics({ weeksInfo, setVideo }: TopicsProps) {
 
                   {/* الـ Badges (أسئلة ووقته) أو القفل */}
                   {lesson.questions ? (
-                    <div className="flex gap-2">
+                    <div
+                      className="flex gap-2"
+                      onClick={() => setOpenModal(true)}
+                    >
                       <span className="cursor-pointer rounded bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
-                        0 Question
+                        {lesson?.questions.length} Question
                       </span>
                       <span className="rounded bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
                         10 Minutes
@@ -108,6 +113,8 @@ export default function Topics({ weeksInfo, setVideo }: TopicsProps) {
               </div>
             ))}
           </div>
+
+          {openModal ? <QuestionModal setShowModal={setOpenModal} /> : ""}
         </div>
       ))}
     </div>

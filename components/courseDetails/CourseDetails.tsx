@@ -126,9 +126,9 @@ export default function CourseDetails() {
           </div>
 
           <CourseMaterial />
-          {/* <div className="mt-5 block px-2 lg:hidden">
-            <Topics  />
-          </div> */}
+          <div className="mt-5 block px-2 lg:hidden">
+            <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} />
+          </div>
           <Comments />
         </div>
         <div className="hidden px-2 lg:block">
