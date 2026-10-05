@@ -1,7 +1,19 @@
 import CourseDetails from "@/components/courseDetails/CourseDetails";
 import BreadCrumb from "@/shared/BreadCrumb";
+import { coursesData } from "@/data/coursesData";
 
-export default function page() {
+export default async function page({
+  params,
+}: {
+  params: { courseId: string };
+}) {
+  // انتظر الـ params (مطلوب في الإصدارات الحديثة من Next.js أحياناً أو حسب إعداداتك)
+  const resolvedParams = await params;
+  const courseId = resolvedParams?.courseId;
+
+  // ابحث عن الكورس المطابق للـ id، وإذا لم يوجد، افترض الكورس الأول كافتراضي
+  const currentCourse =
+    coursesData.find((c) => c.id === courseId) || coursesData[0];
   return (
     <div>
       <div className="bg-custom-bg top-0 w-full px-5 py-3 max-sm:fixed max-sm:h-28">
@@ -14,7 +26,7 @@ export default function page() {
         />
         <div className="mt-4">
           <h1 className="text-3xl font-bold max-sm:text-xl">
-            Modern React.js Frontend Development
+            {currentCourse.title}
           </h1>
         </div>
       </div>

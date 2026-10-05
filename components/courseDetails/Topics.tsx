@@ -2,33 +2,80 @@ import React from "react";
 import { GiDialPadlock } from "react-icons/gi";
 import { LuStickyNote } from "react-icons/lu";
 
-export default function Topics() {
-  // بيانات تجريبية ثابتة للعرض فقط
-  const weeks = [
-    {
-      weekNumber: 1,
-      description:
-        "Advanced storytelling techniques for writers: Personas, Characters & Plots",
-      lessons: [
-        { id: 1, title: "Introduction", hasMeta: false },
-        { id: 2, title: "Course Review", hasMeta: false },
-        { id: 3, title: "Course Review", hasMeta: true }, // دي اللي عليها تفاصيل الأسئلة والوقت
-        { id: 4, title: "Course Exercise / Reference Files", hasMeta: false },
-        { id: 5, title: "Code Editor Installation", hasMeta: false },
-      ],
-    },
-    {
-      weekNumber: 2,
-      description: "Core programming concepts and syntax fundamentals",
-      lessons: [
-        { id: 6, title: "Defining Functions", hasMeta: false },
-        { id: 7, title: "Function Parameters", hasMeta: false },
-        { id: 8, title: "Return values from function", hasMeta: true },
-        { id: 9, title: "Global variable and Scope", hasMeta: false },
-        { id: 10, title: "Newer way of creating a Constant", hasMeta: false },
-      ],
-    },
-  ];
+export type ItemType = "lesson" | "pdf" | "exam";
+
+export interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+}
+
+export interface WeekItem {
+  id: string;
+  type: ItemType;
+  title: string;
+  duration?: string;
+  videoUrl?: string;
+  fileSize?: string;
+  downloadUrl?: string;
+  completed?: boolean;
+  questions?: Question[];
+}
+
+export interface Week {
+  weekNumber: number;
+  title: string;
+  items: WeekItem[];
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface Course {
+  id: string;
+  title: string;
+  instructor: string;
+  thumbnail: string;
+  progress: number;
+  overviewVideoUrl: string;
+  description: string;
+  weeks: Week[];
+  faqs: FAQ[];
+}
+
+interface TopicsProps {
+  weeksInfo: Week[]; // لاحظ وجود الأقواس [] لأنها مصفوفة
+}
+export default function Topics({ weeksInfo }: TopicsProps) {
+  // // بيانات تجريبية ثابتة للعرض فقط
+  // const weeks = [
+  //   {
+  //     weekNumber: 1,
+  //     description:
+  //       "Advanced storytelling techniques for writers: Personas, Characters & Plots",
+  //     lessons: [
+  //       { id: 1, title: "Introduction", hasMeta: false },
+  //       { id: 2, title: "Course Review", hasMeta: false },
+  //       { id: 3, title: "Course Review", hasMeta: true }, // دي اللي عليها تفاصيل الأسئلة والوقت
+  //       { id: 4, title: "Course Exercise / Reference Files", hasMeta: false },
+  //       { id: 5, title: "Code Editor Installation", hasMeta: false },
+  //     ],
+  //   },
+  //   {
+  //     weekNumber: 2,
+  //     description: "Core programming concepts and syntax fundamentals",
+  //     lessons: [
+  //       { id: 6, title: "Defining Functions", hasMeta: false },
+  //       { id: 7, title: "Function Parameters", hasMeta: false },
+  //       { id: 8, title: "Return values from function", hasMeta: true },
+  //       { id: 9, title: "Global variable and Scope", hasMeta: false },
+  //       { id: 10, title: "Newer way of creating a Constant", hasMeta: false },
+  //     ],
+  //   },
+  // ];
 
   return (
     <div>
@@ -43,19 +90,19 @@ export default function Topics() {
       </div>
 
       {/* عرض الأسابيع والدروس */}
-      {weeks.map((week) => (
+      {weeksInfo?.map((week) => (
         <div
-          key={week.weekNumber}
+          key={week.title}
           className="mt-3 mb-6 rounded-xl border border-gray-300 p-5 shadow-sm"
         >
           <div className="mb-3">
-            <p className="text-2xl font-bold">Week {week.weekNumber}</p>
-            <p className="text-sm text-gray-400">{week.description}</p>
+            <p className="text-2xl font-bold">Week {week.title}</p>
+            <p className="text-sm text-gray-400">this is week</p>
           </div>
           <hr className="text-gray-300" />
 
           <div className="text-gray-600">
-            {week.lessons.map((lesson, i) => (
+            {week.items.map((lesson: WeekItem) => (
               <div key={lesson.id}>
                 <div className="mt-3 mb-2 flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-gray-100">
                   {/* عنوان الدرس مع الأيقونة */}
@@ -65,7 +112,7 @@ export default function Topics() {
                   </div>
 
                   {/* الـ Badges (أسئلة ووقته) أو القفل */}
-                  {lesson.hasMeta ? (
+                  {lesson.questions ? (
                     <div className="flex gap-2">
                       <span className="cursor-pointer rounded bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
                         0 Question

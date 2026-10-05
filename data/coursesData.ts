@@ -63,7 +63,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Course Introduction & Project Structure",
             duration: "10:05",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/s2skans2dP4",
             completed: true,
           },
           {
@@ -71,7 +71,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Understanding JSX and Props",
             duration: "15:30",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/k2QlYbWjS1A",
             completed: true,
           },
           {
@@ -79,7 +79,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Managing State with useState",
             duration: "22:10",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/k2QlYbWjS1A",
             completed: false,
           },
           {
@@ -87,7 +87,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Handling Events and User Input",
             duration: "14:45",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/V1PxgjIhTw0",
             completed: false,
           },
           {
@@ -95,7 +95,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Conditional Rendering in React",
             duration: "18:20",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/watch?v=bCkfU_wHPcY",
             completed: false,
           },
           {
@@ -234,7 +234,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Differences between Pages and App Router",
             duration: "12:00",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/Y7GF5vWni1c",
             completed: true,
           },
           {
@@ -327,7 +327,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Core UI/UX Principles",
             duration: "14:30",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/SRec90j6lTY",
             completed: true,
           },
           {
@@ -335,7 +335,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Mastering Flexbox and Grid in Tailwind",
             duration: "25:10",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/SRec90j6lTY",
             completed: true,
           },
           {
@@ -343,7 +343,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Responsive Design Breakpoints",
             duration: "19:00",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/SRec90j6lTY",
             completed: true,
           },
           {
@@ -413,7 +413,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "How Node.js Works Behind the Scenes",
             duration: "16:00",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/JZXQ455OT3A",
             completed: false,
           },
           {
@@ -421,7 +421,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Setting up Express Server",
             duration: "21:00",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/watch?v=JZXQ455OT3A",
             completed: false,
           },
           {
@@ -429,7 +429,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Routing and Middleware",
             duration: "24:30",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/watch?v=JZXQ455OT3A",
             completed: false,
           },
           {
@@ -499,7 +499,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "When to use Redux vs Server State?",
             duration: "11:20",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/bpZzWDQXJdE",
             completed: true,
           },
           {
@@ -507,7 +507,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Setting up Redux Toolkit Slices",
             duration: "22:00",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/watch?v=bpZzWDQXJdE",
             completed: true,
           },
           {
@@ -591,7 +591,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Understanding Big O Complexity",
             duration: "19:30",
-            videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+            videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME",
             completed: true,
           },
           {
