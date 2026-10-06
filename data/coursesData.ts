@@ -50,7 +50,7 @@ export const coursesData: Course[] = [
     instructor: "Ahmed Ali",
     thumbnail:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
-    progress: 40,
+    progress: 0,
     overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     description:
       "Learn to build modern, responsive web applications using React, Hooks, and State Management.",
@@ -65,7 +65,7 @@ export const coursesData: Course[] = [
             title: "Course Introduction & Project Structure",
             duration: "10:05",
             videoUrl: "https://www.youtube.com/embed/s2skans2dP4",
-            completed: true,
+            completed: false,
           },
           {
             id: "w1-i2",
@@ -73,7 +73,7 @@ export const coursesData: Course[] = [
             title: "Understanding JSX and Props",
             duration: "15:30",
             videoUrl: "https://www.youtube.com/embed/k2QlYbWjS1A",
-            completed: true,
+            completed: false,
           },
           {
             id: "w1-i3",

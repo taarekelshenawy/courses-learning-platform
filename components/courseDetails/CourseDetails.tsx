@@ -74,6 +74,7 @@ export default function CourseDetails() {
         <div>
           <div className="top-0 max-sm:sticky">
             <iframe
+            key={videoUpdated ? videoUpdated : course[0]?.weeks[0]?.items[0]?.videoUrl}
               className="w-full max-sm:h-64"
               height="410"
               src={
