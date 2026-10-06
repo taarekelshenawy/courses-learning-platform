@@ -66,7 +66,7 @@ export default function CourseDetails() {
     setCourse(courseInfo);
   }, [courseId]);
 
-  console.log(course[0]?.weeks);
+
 
   return (
     <>
@@ -127,12 +127,12 @@ export default function CourseDetails() {
 
           <CourseMaterial />
           <div className="mt-5 block px-2 lg:hidden">
-            <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} />
+            <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated}  course={course} setCourse={setCourse} />
           </div>
           <Comments />
         </div>
         <div className="hidden px-2 lg:block">
-          <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} />
+          <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} course={course} setCourse={setCourse} />
         </div>
       </div>
     </>

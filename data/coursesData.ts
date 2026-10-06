@@ -5,6 +5,7 @@ export interface Question {
   question: string;
   options: string[];
   correctAnswer: number;
+  pagenumber: number;
 }
 
 export interface WeekItem {
@@ -116,6 +117,7 @@ export const coursesData: Course[] = [
                 question: "What is used to pass data between React components?",
                 options: ["Props", "HTML", "CSS", "SQL"],
                 correctAnswer: 0,
+                pagenumber: 1,
               },
               {
                 id: 2,
@@ -123,6 +125,7 @@ export const coursesData: Course[] = [
                   "Which hook is used for managing state in functional components?",
                 options: ["useEffect", "useState", "useRef", "useMemo"],
                 correctAnswer: 1,
+                pagenumber: 2,
               },
             ],
           },
@@ -196,6 +199,7 @@ export const coursesData: Course[] = [
                   "Never",
                 ],
                 correctAnswer: 1,
+                pagenumber: 1,
               },
             ],
           },
@@ -293,6 +297,7 @@ export const coursesData: Course[] = [
                   "Functional Component",
                 ],
                 correctAnswer: 1,
+                pagenumber: 1,
               },
             ],
           },
@@ -380,6 +385,7 @@ export const coursesData: Course[] = [
                 question: "Which class represents flex display in Tailwind?",
                 options: ["display-flex", "flex", "d-flex", "flexbox"],
                 correctAnswer: 1,
+                pagenumber: 1,
               },
             ],
           },
@@ -466,6 +472,7 @@ export const coursesData: Course[] = [
                 question: "What environment runs Node.js code?",
                 options: ["V8 Engine", "JVM", "Python Runtime", "CLR"],
                 correctAnswer: 0,
+                pagenumber: 1,
               },
             ],
           },
@@ -557,6 +564,7 @@ export const coursesData: Course[] = [
                   "Routing",
                 ],
                 correctAnswer: 1,
+                pagenumber: 1,
               },
             ],
           },

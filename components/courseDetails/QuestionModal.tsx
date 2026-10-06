@@ -1,10 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
+export interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  pagenumber: number;
+}
+
 export default function QuestionModal({
   setShowModal,
+  quizQuestions,
+  weekNumber, // 👈 أضفنا رقم الأسبوع لكي نعرف أي أسبوع تم اجتيازه
+  onQuizComplete, // 👈 الدالة التي ستحدث الـ Progress في الأب
 }: {
   setShowModal: (val: boolean) => void;
+  quizQuestions: Question[];
+  weekNumber: number;
+  onQuizComplete: (weekNum: number, passed: boolean) => void;
 }) {
   const [page, setPage] = useState(1);
   const [timeLeft, setTimeLeft] = useState(60);
@@ -12,57 +26,45 @@ export default function QuestionModal({
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: number]: number;
   }>({});
-
-  const quizQuestions = [
-    {
-      id: 1,
-      question: "Which language is used to style web pages?",
-      options: ["JavaScript", "CSS", "Python", "HTML"],
-      correctAnswer: "CSS",
-      pagenumber: 1,
-    },
-    {
-      id: 2,
-      question:
-        "Which of the following is used to add interactivity to web pages?",
-      options: ["HTML", "CSS", "JavaScript", "SQL"],
-      correctAnswer: "JavaScript",
-      pagenumber: 2,
-    },
-    {
-      id: 3,
-      question: "Which HTML tag is used to display an image?",
-      options: ["<img>", "<picture>", "<image>", "<src>"],
-      correctAnswer: "<img>",
-      pagenumber: 3,
-    },
-    {
-      id: 4,
-      question: "Which CSS property is used to change the background color?",
-      options: ["color", "background-color", "bg-color", "background"],
-      correctAnswer: "background-color",
-      pagenumber: 4,
-    },
-  ];
+  const [score, setScore] = useState<number | null>(null);
 
   const Questionsdata = quizQuestions.filter(
     (item) => item.pagenumber === page
   );
 
-  const handleSelect = (questionIndex: number, optionIndex: number) => {
+  const handleSelect = (questionId: number, optionIndex: number) => {
     if (!quizFinished) {
-      setSelectedOptions((prev) => ({ ...prev, [questionIndex]: optionIndex }));
+      setSelectedOptions((prev) => ({ ...prev, [questionId]: optionIndex }));
     }
   };
 
   useEffect(() => {
     if (timeLeft <= 0) {
-      setQuizFinished(true);
+      handleFinishQuiz();
       return;
     }
     const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     return () => clearInterval(timer);
   }, [timeLeft]);
+
+  const handleFinishQuiz = () => {
+    setQuizFinished(true);
+    let calculatedScore = 0;
+
+    quizQuestions.forEach((q) => {
+      if (selectedOptions[q.id] === q.correctAnswer) {
+        calculatedScore += 1;
+      }
+    });
+
+    setScore(calculatedScore);
+
+    // حساب هل نجح الطالب أم لا (مثلاً الشرط: الحصول على نصف الدرجة أو أكثر)
+    const isPassed = calculatedScore >= Math.ceil(quizQuestions.length / 2);
+
+    // إرسال النتيجة للمكون الأب لتحديث الـ Progress
+    onQuizComplete(weekNumber, isPassed);
+  };
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -76,46 +78,243 @@ export default function QuestionModal({
       onClick={() => setShowModal(false)}
     >
       <div
-        className="absolute top-1/2 left-1/2 mt-4 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-blue-700 px-4 py-2"
+        className="absolute top-1/2 left-1/2 mt-4 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-blue-700 px-4 py-4 w-96 max-w-full"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto mb-3 max-w-52 rounded bg-amber-300 text-center text-xl font-bold text-white">
           {quizFinished ? "⏰ Time's up!" : `⏰ ${formatTime(timeLeft)}`}
         </div>
 
+        {/* أزرار الصفحات */}
         <div className="mb-3 flex items-center justify-center gap-3 font-bold text-white">
-          {[1, 2, 3, 4].map((num) => (
+          {Array.from({ length: Math.max(...quizQuestions.map(q => q.pagenumber || 1)) }).map((_, index) => (
             <button
-              key={num}
-              onClick={() => setPage(num)}
-              className={`h-12 w-12 cursor-pointer rounded-full border border-white transition-colors ${page === num ? "bg-white text-blue-700" : "bg-blue-700 hover:bg-white hover:text-blue-700"}`}
+              key={index}
+              onClick={() => setPage(index + 1)}
+              className={`h-10 w-10 cursor-pointer rounded-full border border-white transition-colors ${
+                page === index + 1
+                  ? "bg-white text-blue-700"
+                  : "bg-blue-700 hover:bg-white hover:text-blue-700"
+              }`}
             >
-              {num}
+              {index + 1}
             </button>
           ))}
         </div>
 
-        <div className="rounded-3xl bg-white p-3">
-          {Questionsdata.map((item, questionIndex) => (
-            <div key={item.id} className="">
-              <p className="lg:text-md font-bold">
-                {item.id}. {item.question}
+        <div className="rounded-3xl bg-white p-4">
+          {quizFinished ? (
+            <div className="text-center py-6">
+              <h2 className="text-2xl font-bold text-blue-700 mb-2">انتهى الاختبار!</h2>
+              <p className="text-lg font-semibold text-gray-700">
+                نتيجتك هي: {score} من {quizQuestions.length}
               </p>
-              <div className="mt-2">
-                {item.options.map((option, optionIndex) => (
-                  <div
-                    key={optionIndex}
-                    onClick={() => handleSelect(questionIndex, optionIndex)}
-                    className={`mb-3 flex w-full cursor-pointer items-center rounded-lg border px-3 py-1 transition-colors duration-300 ${selectedOptions[questionIndex] === optionIndex ? "bg-blue-600 text-white" : "bg-white text-black"} `}
-                  >
-                    <p>{option}</p>
-                  </div>
-                ))}
-              </div>
+              <p className={`font-bold mt-2 ${score! >= Math.ceil(quizQuestions.length / 2) ? 'text-green-600' : 'text-red-600'}`}>
+                {score! >= Math.ceil(quizQuestions.length / 2) ? "🎉 مبروك، لقد نجحت!" : "❌ عذراً، لم تنجح في الاختبار"}
+              </p>
+              <button
+                onClick={() => setShowModal(false)}
+                className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-bold"
+              >
+                إغلاق
+              </button>
             </div>
-          ))}
+          ) : (
+            <>
+              {Questionsdata.map((item) => (
+                <div key={item.id} className="">
+                  <p className="lg:text-md font-bold mb-3">
+                    {item.id}. {item.question}
+                  </p>
+                  <div className="mt-2">
+                    {item.options.map((option, optionIndex) => (
+                      <div
+                        key={optionIndex}
+                        onClick={() => handleSelect(item.id, optionIndex)}
+                        className={`mb-3 flex w-full cursor-pointer items-center rounded-lg border px-3 py-2 transition-colors duration-300 ${
+                          selectedOptions[item.id] === optionIndex
+                            ? "bg-blue-600 text-white"
+                            : "bg-white text-black border-gray-300"
+                        }`}
+                      >
+                        <p>{option}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={handleFinishQuiz}
+                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-bold transition-colors cursor-pointer"
+              >
+                إرسال الاختبار
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 }
+
+// "use client";
+// import React, { useState, useEffect } from "react";
+
+// export interface Question {
+//   id: number;
+//   question: string;
+//   options: string[];
+//   correctAnswer: number;
+//   pagenumber: number;
+// }
+
+// export default function QuestionModal({
+//   setShowModal,
+//   quizQuestions,
+// }: {
+//   setShowModal: (val: boolean) => void;
+//   quizQuestions: Question[];
+// }) {
+//   const [page, setPage] = useState(1);
+//   const [timeLeft, setTimeLeft] = useState(60);
+//   const [quizFinished, setQuizFinished] = useState(false);
+//   const [selectedOptions, setSelectedOptions] = useState<{
+//     [key: number]: number;
+//   }>({});
+//   const [score, setScore] = useState<number | null>(null);
+
+//   const Questionsdata = quizQuestions.filter(
+//     (item) => item.pagenumber === page
+//   );
+
+//   // استخدام id السؤال بدلاً من الـ index لضمان دقة الحفظ
+//   const handleSelect = (questionId: number, optionIndex: number) => {
+//     if (!quizFinished) {
+//       setSelectedOptions((prev) => ({ ...prev, [questionId]: optionIndex }));
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (timeLeft <= 0) {
+//       handleFinishQuiz();
+//       return;
+//     }
+//     const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+//     return () => clearInterval(timer);
+//   }, [timeLeft]);
+
+//   // دالة حساب الدرجة النهائية
+//   const handleFinishQuiz = () => {
+//     setQuizFinished(true);
+//     let calculatedScore = 0;
+
+//     quizQuestions.forEach((q) => {
+//       // مقارنة إجابة الطالب بـ correctAnswer الموجودة في بيانات الكورس
+//       if (selectedOptions[q.id] === q.correctAnswer) {
+//         calculatedScore += 1;
+//       }
+//     });
+
+//     setScore(calculatedScore);
+//   };
+
+//   const formatTime = (seconds: number) => {
+//     const mins = Math.floor(seconds / 60);
+//     const secs = seconds % 60;
+//     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+//   };
+
+//   return (
+//     <div
+//       className="fixed inset-0 z-50 bg-[rgba(128,128,128,0.5)]"
+//       onClick={() => setShowModal(false)}
+//     >
+//       {/* عرض الأسئلة والخيارات */}
+//       <div className="absolute top-1/2 left-1/2 mt-4 w-96 max-w-full -translate-x-1/2 -translate-y-1/2 transform rounded-3xl bg-white p-4 px-4 py-4">
+//         {quizFinished ? (
+//           <div className="py-6 text-center">
+//             <h2 className="mb-2 text-2xl font-bold text-blue-700">
+//               انتهى الاختبار!
+//             </h2>
+//             <p className="text-lg font-semibold text-gray-700">
+//               نتيجتك هي: {score} من {quizQuestions.length}
+//             </p>
+//             <button
+//               onClick={() => setShowModal(false)}
+//               className="mt-4 rounded-lg bg-blue-700 px-6 py-2 font-bold text-white"
+//             >
+//               إغلاق
+//             </button>
+//           </div>
+//         ) : (
+//           <>
+//             <div
+//               className="absolute top-1/2 left-1/2 mt-4 w-96 max-w-full -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-blue-700 px-4 py-4"
+//               onClick={(e) => e.stopPropagation()}
+//             >
+//               <div className="mx-auto mb-3 max-w-52 rounded bg-amber-300 text-center text-xl font-bold text-white">
+//                 {quizFinished ? "⏰ Time's up!" : `⏰ ${formatTime(timeLeft)}`}
+//               </div>
+
+//               {/* أزرار التنقل بين الصفحات */}
+//               <div className="mb-3 flex items-center justify-center gap-3 font-bold text-white">
+//                 {Array.from({
+//                   length: Math.max(
+//                     ...quizQuestions.map((q) => q.pagenumber || 1)
+//                   ),
+//                 }).map((_, index) => (
+//                   <button
+//                     key={index}
+//                     onClick={() => setPage(index + 1)}
+//                     className={`h-10 w-10 cursor-pointer rounded-full border border-white transition-colors ${
+//                       page === index + 1
+//                         ? "bg-white text-blue-700"
+//                         : "bg-blue-700 hover:bg-white hover:text-blue-700"
+//                     }`}
+//                   >
+//                     {index + 1}
+//                   </button>
+//                 ))}
+//               </div>
+//               <div className="rounded-3xl bg-white p-4">
+//                 {Questionsdata.map((item) => (
+//                   <div key={item.id} className="">
+//                     <p className="lg:text-md mb-3 font-bold">
+//                       {item.id}. {item.question}
+//                     </p>
+//                     <div className="mt-2">
+//                       {item.options.map((option, optionIndex) => (
+//                         <div
+//                           key={optionIndex}
+//                           onClick={() => handleSelect(item.id, optionIndex)}
+//                           className={`mb-3 flex w-full cursor-pointer items-center rounded-lg border px-3 py-2 transition-colors duration-300 ${
+//                             selectedOptions[item.id] === optionIndex
+//                               ? "bg-blue-600 text-white"
+//                               : "border-gray-300 bg-white text-black"
+//                           }`}
+//                         >
+//                           <p>{option}</p>
+//                         </div>
+//                       ))}
+//                     </div>
+//                   </div>
+//                 ))}
+
+//                 {/* زر إرسال الاختبار في الصفحة الأخيرة أو في كل الصفحات */}
+//                 <button
+//                   onClick={handleFinishQuiz}
+//                   className="mt-4 w-full rounded-lg bg-green-600 py-2 font-bold text-white transition-colors hover:bg-green-700"
+//                 >
+//                   إرسال الاختبار
+//                 </button>
+//               </div>
+//             </div>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+
