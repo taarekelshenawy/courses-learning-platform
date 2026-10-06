@@ -78,7 +78,7 @@ export default function QuestionModal({
       onClick={() => setShowModal(false)}
     >
       <div
-        className="absolute top-1/2 left-1/2 mt-4 -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-blue-700 px-4 py-4 w-96 max-w-full"
+        className="absolute top-1/2 left-1/2 mt-4 w-96 max-w-full -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-blue-700 px-4 py-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto mb-3 max-w-52 rounded bg-amber-300 text-center text-xl font-bold text-white">
@@ -87,7 +87,9 @@ export default function QuestionModal({
 
         {/* أزرار الصفحات */}
         <div className="mb-3 flex items-center justify-center gap-3 font-bold text-white">
-          {Array.from({ length: Math.max(...quizQuestions.map(q => q.pagenumber || 1)) }).map((_, index) => (
+          {Array.from({
+            length: Math.max(...quizQuestions.map((q) => q.pagenumber || 1)),
+          }).map((_, index) => (
             <button
               key={index}
               onClick={() => setPage(index + 1)}
@@ -104,17 +106,23 @@ export default function QuestionModal({
 
         <div className="rounded-3xl bg-white p-4">
           {quizFinished ? (
-            <div className="text-center py-6">
-              <h2 className="text-2xl font-bold text-blue-700 mb-2">انتهى الاختبار!</h2>
+            <div className="py-6 text-center">
+              <h2 className="mb-2 text-2xl font-bold text-blue-700">
+                انتهى الاختبار!
+              </h2>
               <p className="text-lg font-semibold text-gray-700">
                 نتيجتك هي: {score} من {quizQuestions.length}
               </p>
-              <p className={`font-bold mt-2 ${score! >= Math.ceil(quizQuestions.length / 2) ? 'text-green-600' : 'text-red-600'}`}>
-                {score! >= Math.ceil(quizQuestions.length / 2) ? "🎉 مبروك، لقد نجحت!" : "❌ عذراً، لم تنجح في الاختبار"}
+              <p
+                className={`mt-2 font-bold ${score! >= Math.ceil(quizQuestions.length / 2) ? "text-green-600" : "text-red-600"}`}
+              >
+                {score! >= Math.ceil(quizQuestions.length / 2)
+                  ? "🎉 مبروك، لقد نجحت!"
+                  : "❌ عذراً، لم تنجح في الاختبار"}
               </p>
               <button
                 onClick={() => setShowModal(false)}
-                className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-bold"
+                className="mt-4 rounded-lg bg-blue-700 px-6 py-2 font-bold text-white"
               >
                 إغلاق
               </button>
@@ -123,7 +131,7 @@ export default function QuestionModal({
             <>
               {Questionsdata.map((item) => (
                 <div key={item.id} className="">
-                  <p className="lg:text-md font-bold mb-3">
+                  <p className="lg:text-md mb-3 font-bold">
                     {item.id}. {item.question}
                   </p>
                   <div className="mt-2">
@@ -134,7 +142,7 @@ export default function QuestionModal({
                         className={`mb-3 flex w-full cursor-pointer items-center rounded-lg border px-3 py-2 transition-colors duration-300 ${
                           selectedOptions[item.id] === optionIndex
                             ? "bg-blue-600 text-white"
-                            : "bg-white text-black border-gray-300"
+                            : "border-gray-300 bg-white text-black"
                         }`}
                       >
                         <p>{option}</p>
@@ -146,7 +154,7 @@ export default function QuestionModal({
 
               <button
                 onClick={handleFinishQuiz}
-                className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-bold transition-colors cursor-pointer"
+                className="mt-4 w-full cursor-pointer rounded-lg bg-green-600 py-2 font-bold text-white transition-colors hover:bg-green-700"
               >
                 إرسال الاختبار
               </button>
@@ -316,5 +324,3 @@ export default function QuestionModal({
 //     </div>
 //   );
 // }
-
-

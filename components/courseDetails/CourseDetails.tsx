@@ -58,6 +58,11 @@ export interface Course {
 export default function CourseDetails() {
   const [course, setCourse] = useState<Course[]>([]);
   const { courseId } = useParams();
+  const [currentComments, setCurrentComments] = useState(
+    course[0]?.weeks[0]?.items[0]?.comments || []
+  );
+
+  console.log(currentComments);
 
   const [videoUpdated, setVideoUpdated] = useState("");
 
@@ -66,15 +71,26 @@ export default function CourseDetails() {
     setCourse(courseInfo);
   }, [courseId]);
 
+  // دالة إضافة التعليق وتحديث الـ State الخاصة بالتعليقات الحالية أو الكورس
+  const handleAddCommentToLesson = (newComment) => {
+    // تحديث التعليقات الحالية للدرس المختار فوراً ليظهر على الشاشة
+    setCurrentComments((prevComments) => [...prevComments, newComment]);
 
+    // ولو حابب تحفظ التعليق ده جوة مصفوفة الـ course نفسه (عشان لو غيرت الفيديو ورجعت تاني يفضل موجود):
+    // يمكنك تحديث الـ course state هنا عن طريق تعديل الدرس المطابق للـ id الحالي
+  };
 
   return (
     <>
-      <div className="flex gap-10 max-sm:mt-24 max-sm:flex-col sm:flex-col lg:flex-row">
-        <div>
+      <div className="flex w-full gap-10 max-sm:mt-24 max-sm:flex-col sm:flex-col lg:flex-row">
+        <div className="flex-2">
           <div className="top-0 max-sm:sticky">
             <iframe
-            key={videoUpdated ? videoUpdated : course[0]?.weeks[0]?.items[0]?.videoUrl}
+              key={
+                videoUpdated
+                  ? videoUpdated
+                  : course[0]?.weeks[0]?.items[0]?.videoUrl
+              }
               className="w-full max-sm:h-64"
               height="410"
               src={
@@ -128,12 +144,27 @@ export default function CourseDetails() {
 
           <CourseMaterial />
           <div className="mt-5 block px-2 lg:hidden">
-            <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated}  course={course} setCourse={setCourse} />
+            <Topics
+              weeksInfo={course[0]?.weeks}
+              setVideo={setVideoUpdated}
+              course={course}
+              setCourse={setCourse}
+              setCurrentComments={setCurrentComments}
+            />
           </div>
-          <Comments />
+          <Comments
+            commentsData={currentComments}
+            onAddComment={handleAddCommentToLesson}
+          />
         </div>
-        <div className="hidden px-2 lg:block">
-          <Topics weeksInfo={course[0]?.weeks} setVideo={setVideoUpdated} course={course} setCourse={setCourse} />
+        <div className="hidden flex-1 px-2 lg:block">
+          <Topics
+            weeksInfo={course[0]?.weeks}
+            setVideo={setVideoUpdated}
+            course={course}
+            setCourse={setCourse}
+            setCurrentComments={setCurrentComments}
+          />
         </div>
       </div>
     </>
