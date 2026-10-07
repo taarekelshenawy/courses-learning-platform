@@ -696,7 +696,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Course Introduction & Project Structure",
             duration: "10:05",
-            videoUrl: "https://www.youtube.com/embed/s2skans2dP4",
+            videoUrl: "https://www.youtube.com/embed/s2skans2dP4?autoplay=1",
             completed: false,
             comments: [
               {
@@ -788,7 +788,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Week 1 Summary & Cheat Sheet",
             fileSize: "2.4 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "w1-i7",

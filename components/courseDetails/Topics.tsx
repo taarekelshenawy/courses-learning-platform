@@ -199,7 +199,7 @@ export default function Topics({
           </div>
           <hr className="text-gray-300" />
 
-          <div className="text-gray-600">
+          {/* <div className="text-gray-600">
             {week.items.map((lesson: WeekItem) => {
               const currentItemState = course?.[0]?.weeks
                 ?.find((w) => w.weekNumber === week.weekNumber)
@@ -253,6 +253,102 @@ export default function Topics({
                     ) : (
                       <GiDialPadlock className="text-lg text-gray-400" />
                     )}
+                  </div>
+                  <hr className="text-gray-200" />
+                </div>
+              );
+            })}
+          </div> */}
+          <div className="text-gray-600">
+            {week.items.map((lesson: WeekItem) => {
+              const currentItemState = course?.[0]?.weeks
+                ?.find((w) => w.weekNumber === week.weekNumber)
+                ?.items?.find((i) => i.id === lesson.id);
+
+              const isCompleted = currentItemState?.completed;
+              const isPlaying = activeVideoId === lesson.id;
+
+              return (
+                <div key={lesson.id}>
+                  <div className="mt-3 mb-2 flex items-center justify-between rounded-lg p-2 transition-colors hover:bg-gray-100">
+                    
+                    {/* 📄 لو العنصر عبارة عن PDF */}
+                    {lesson.type === "pdf" ? (
+                      <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">📄</span>
+                          <div>
+                            <span className="text-sm font-medium text-gray-800 block">
+                              {lesson.title}
+                            </span>
+                            {lesson.fileSize && (
+                              <span className="text-xs text-gray-400">{lesson.fileSize}</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* زر التحميل الفوري */}
+                        <a
+                          href={lesson.downloadUrl}
+                          download
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-semibold transition flex items-center gap-1"
+                        >
+                          📥 تحميل PDF
+                        </a>
+                      </div>
+                    ) : (
+                      /* عرض الدروس العادية (فيديو أو نص) */
+                      <div className="flex items-center gap-2">
+                        <LuStickyNote className="text-gray-500" />
+                        <span
+                          className="cursor-pointer text-sm font-medium"
+                          onClick={() =>
+                            handleVideoClick(
+                              week.weekNumber,
+                              lesson.id,
+                              lesson.videoUrl,
+                              lesson
+                            )
+                          }
+                        >
+                          {lesson.title}
+                        </span>
+                      </div>
+                    )}
+
+                    {/* أجزاء الحالة (اسئلة، تشغيل، أو علامة صح، أو قفل) */}
+                    {lesson.type !== "pdf" && (
+                      <div>
+                        {lesson.questions ? (
+                          <div
+                            className="flex gap-2"
+                            onClick={() => {
+                              setOpenModal(true);
+                              setQuestions(lesson.questions || []);
+                              setActiveQuizWeek(week.weekNumber);
+                            }}
+                          >
+                            <span className="cursor-pointer rounded bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">
+                              {lesson.questions.length} Question
+                            </span>
+                            <span className="rounded bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">
+                              10 Minutes
+                            </span>
+                          </div>
+                        ) : isPlaying ? (
+                          <span className="text-xs font-bold text-blue-600">
+                            ▶ Playing
+                          </span>
+                        ) : isCompleted ? (
+                          <span className="text-lg text-green-600">✅</span>
+                        ) : (
+                          <GiDialPadlock className="text-lg text-gray-400" />
+                        )}
+                      </div>
+                    )}
+
                   </div>
                   <hr className="text-gray-200" />
                 </div>
