@@ -1,13 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { Question } from "@/types/courseTypes";
 
-export interface Question {
-  id: number;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-  pagenumber: number;
-}
+
 
 export default function QuestionModal({
   setShowModal,
