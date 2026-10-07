@@ -7,11 +7,9 @@ export default async function page({
 }: {
   params: { courseId: string };
 }) {
-  
   const resolvedParams = await params;
   const courseId = resolvedParams?.courseId;
 
- 
   const currentCourse =
     coursesData.find((c) => c.id === courseId) || coursesData[0];
   return (

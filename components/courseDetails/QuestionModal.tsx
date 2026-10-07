@@ -13,7 +13,7 @@ export default function QuestionModal({
   setShowModal,
   quizQuestions,
   weekNumber,
-  onQuizComplete, 
+  onQuizComplete,
 }: {
   setShowModal: (val: boolean) => void;
   quizQuestions: Question[];
@@ -165,5 +165,3 @@ export default function QuestionModal({
     </div>
   );
 }
-
-

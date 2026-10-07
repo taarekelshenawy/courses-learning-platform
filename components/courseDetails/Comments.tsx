@@ -1,28 +1,30 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { Comment } from "@/types/courseTypes";
 
-export const Comments = ({ commentsData, onAddComment }) => {
+type commentProps = {
+  commentsData: Comment[];
+  onAddComment: (newComment: Comment) => void;
+};
+
+export const Comments = ({ commentsData, onAddComment }: commentProps) => {
   const [commentText, setCommentText] = useState("");
 
   function AddComment(e) {
-    e.preventDefault(); // عشان الصفحة متعملش Refresh
-    if (!commentText.trim()) return; // لو الفاضي فاضي متعملش حاجة
-
-    // كائن التعليق الجديد
-    const newComment = {
-      name: "Tarek Elshenawy", // اسمك أو اسم المستخدم الحالي
+    e.preventDefault();
+    if (!commentText.trim()) return;
+    const newComment: Comment = {
+      name: "Tarek Elshenawy",
       date: "Just now",
-      avatar: "https://github.com/shadcn.png", // صورة افتراضية أو صورة اليوزر
+      avatar: "https://github.com/shadcn.png",
       description: commentText,
     };
 
-    // استدعاء الدالة القادمة من الأب لتحديث الداتا
     if (onAddComment) {
       onAddComment(newComment);
     }
 
-    // تفريغ الـ textarea بعد الإرسال
     setCommentText("");
   }
   return (
@@ -78,4 +80,3 @@ export const Comments = ({ commentsData, onAddComment }) => {
     </div>
   );
 };
-
