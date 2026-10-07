@@ -953,7 +953,7 @@ export const coursesData: Course[] = [
     instructor: "Mohamed Ibrahim",
     thumbnail:
       "https://assets.vercel.com/image/upload/v1538361091/repositories/next-js/next-js.png",
-    progress: 15,
+    progress: 0,
     overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     description:
       "Your ultimate guide to building fast, SEO-friendly web applications with Next.js 14+.",
@@ -1093,7 +1093,7 @@ export const coursesData: Course[] = [
     instructor: "Sara Mahmoud",
     thumbnail:
       "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop",
-    progress: 80,
+    progress: 0,
     overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     description:
       "Learn how to translate Figma designs into real, responsive interfaces quickly and efficiently.",
@@ -1357,7 +1357,7 @@ export const coursesData: Course[] = [
     instructor: "Yasmine Abdullah",
     thumbnail:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
-    progress: 50,
+    progress: 0,
     overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     description:
       "Master global state management and server state efficiently with minimal boilerplate.",
@@ -1495,7 +1495,7 @@ export const coursesData: Course[] = [
     instructor: "Kareem Abdelrahman",
     thumbnail:
       "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=600&auto=format&fit=crop",
-    progress: 10,
+    progress: 0,
     overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
     description:
       "Sharpen your algorithmic thinking and ace top tech company interviews successfully.",

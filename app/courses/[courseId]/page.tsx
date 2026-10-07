@@ -7,11 +7,11 @@ export default async function page({
 }: {
   params: { courseId: string };
 }) {
-  // انتظر الـ params (مطلوب في الإصدارات الحديثة من Next.js أحياناً أو حسب إعداداتك)
+  
   const resolvedParams = await params;
   const courseId = resolvedParams?.courseId;
 
-  // ابحث عن الكورس المطابق للـ id، وإذا لم يوجد، افترض الكورس الأول كافتراضي
+ 
   const currentCourse =
     coursesData.find((c) => c.id === courseId) || coursesData[0];
   return (
