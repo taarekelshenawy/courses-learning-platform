@@ -33,25 +33,25 @@ export default function PdfModal({
             </button>
           </div>
         </div>
-        <div className="w-full flex-1 bg-gray-100">
-          <object
-            data={currentPdfUrl}
-            type="application/pdf"
+      <div className="w-full flex-1 bg-gray-100">
+          <iframe
+            src={`https://docs.google.com/gview?url=${encodeURIComponent(currentPdfUrl)}&embedded=true`}
             className="h-full w-full border-none"
+            title={currentPdfTitle}
           >
             <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
               <p className="text-sm text-gray-600">
-                عذراً، متصفحك لا يدعم العرض المباشر لهذا الملف.
+                Sorry, your browser does not support direct viewing of this file.
               </p>
               <a
                 href={currentPdfUrl}
                 download
                 className="rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue-700"
               >
-                تحميل الملف على جهازك
+                Download File
               </a>
             </div>
-          </object>
+          </iframe>
         </div>
       </div>
     </div>
