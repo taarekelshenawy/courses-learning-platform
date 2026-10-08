@@ -285,7 +285,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Advanced React Hooks Guide",
             fileSize: "4.1 MB",
-            downloadUrl: "https://drive.google.com/file/d/1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW/view?usp=sharing",
+            downloadUrl: "https://docs.google.com/gview?url=https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW&embedded=true",
           },
           {
             id: "w2-i7",
