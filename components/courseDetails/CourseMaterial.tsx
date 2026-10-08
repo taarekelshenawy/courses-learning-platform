@@ -1,8 +1,8 @@
 import Image from "next/image";
-import dur_icon from "../../components/Images/clock.png";
-import lesson_icon from "../../components/Images/study.png";
-import enrolled_icon from "../../components/Images/license.png";
-import languages_icon from "../../components/Images/language.png";
+import dur_icon from "../../components/images/clock.png";
+import lesson_icon from "../../components/images/study.png";
+import enrolled_icon from "../../components/images/license.png";
+import languages_icon from "../../components/images/language.png";
 
 export default function CourseMaterial() {
   return (
