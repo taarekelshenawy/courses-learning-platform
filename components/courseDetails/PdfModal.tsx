@@ -11,7 +11,6 @@ export default function PdfModal({
   currentPdfTitle,
   setIsPdfModalOpen,
 }: pdfProps) {
- 
   const fullPdfUrl =
     typeof window !== "undefined" && currentPdfUrl.startsWith("/")
       ? `${window.location.origin}${currentPdfUrl}`
@@ -50,12 +49,14 @@ export default function PdfModal({
             title={currentPdfTitle}
           >
             <div className="flex flex-col items-center justify-center gap-3">
-              <p className="text-gray-600">Your browser does not support inline PDF viewing.</p>
+              <p className="text-gray-600">
+                Your browser does not support inline PDF viewing.
+              </p>
               <a
                 href={fullPdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-blue-600 px-6 py-2 text-white font-semibold"
+                className="rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white"
               >
                 Open PDF in New Tab ↗
               </a>
@@ -66,4 +67,3 @@ export default function PdfModal({
     </div>
   );
 }
-
