@@ -164,7 +164,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Week 1 Summary & Cheat Sheet",
             fileSize: "2.4 MB",
-            downloadUrl: "https://drive.google.com/file/d/1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW/view?usp=sharing",
+            downloadUrl: "https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW",
           },
           {
             id: "w1-i7",
@@ -429,7 +429,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Next.js Routing Cheat Sheet",
             fileSize: "1.8 MB",
-            downloadUrl: "https://drive.google.com/file/d/1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW/view?usp=sharing",
+            downloadUrl: "https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW",
           },
           {
             id: "c2-w1-7",
@@ -568,7 +568,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Tailwind CSS Quick Reference",
             fileSize: "3.5 MB",
-            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
+            downloadUrl: "https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW",
           },
           {
             id: "c3-w1-7",
@@ -700,7 +700,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Node.js Architecture Notes",
             fileSize: "2.1 MB",
-            downloadUrl: "https://drive.google.com/file/d/1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW/view?usp=sharing",
+            downloadUrl:"https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW",
           },
           {
             id: "c4-w1-7",
@@ -970,7 +970,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Common Algorithmic Patterns PDF",
             fileSize: "3.0 MB",
-            downloadUrl: "https://drive.google.com/file/d/1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW/view?usp=sharing",
+            downloadUrl: "https://drive.google.com/uc?export=view&id=1MU9ULLAUUzXqXJ08fVMH2BfZaTEP3ySW",
           },
           {
             id: "c6-w1-7",
