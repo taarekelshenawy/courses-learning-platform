@@ -18,7 +18,7 @@ export default function AskQuestionModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!question.trim()) return alert("اكتب سؤالك أولاً 👇");
+    if (!question.trim()) return alert("اكتب سؤالك أولاً ");
     setQuestion(question);
     setShowModal(false);
   };

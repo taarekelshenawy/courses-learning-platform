@@ -25,7 +25,7 @@ export interface WeekItem {
   downloadUrl?: string;
   completed?: boolean;
   questions?: Question[];
-  comments?: Comment[]; // خاص بالدروس لعرض التعليقات
+  comments?: Comment[];
 }
 
 export interface Week {
@@ -59,7 +59,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.youtube.com/embed/CKSBlLFdtlI",
+    overviewVideoUrl: "https://www.youtube.com/embed/j942wKiXFu8",
     description:
       "Learn to build modern, responsive web applications using React, Hooks, and State Management.",
     weeks: [
@@ -147,7 +147,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Conditional Rendering in React",
             duration: "18:20",
-            videoUrl:"https://www.youtube.com/embed/uvEAvxWvwOs?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/uvEAvxWvwOs?autoplay=1",
             completed: false,
             comments: [
               {
@@ -285,7 +285,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Advanced React Hooks Guide",
             fileSize: "4.1 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "w2-i7",
@@ -330,7 +330,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://assets.vercel.com/image/upload/v1538361091/repositories/next-js/next-js.png",
     progress: 0,
-    overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    overviewVideoUrl: "https://www.youtube.com/embed/xnOwOBYaA3w",
     description:
       "Your ultimate guide to building fast, SEO-friendly web applications with Next.js 14+.",
     weeks: [
@@ -344,7 +344,7 @@ export const coursesData: Course[] = [
             title: "Differences between Pages and App Router",
             duration: "12:00",
             videoUrl: "https://www.youtube.com/embed/Y7GF5vWni1c?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Jessica Alba",
@@ -429,7 +429,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Next.js Routing Cheat Sheet",
             fileSize: "1.8 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "c2-w1-7",
@@ -470,7 +470,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    overviewVideoUrl: "https://www.youtube.com/embed/ODpB9-MCa5s",
     description:
       "Learn how to translate Figma designs into real, responsive interfaces quickly and efficiently.",
     weeks: [
@@ -484,7 +484,7 @@ export const coursesData: Course[] = [
             title: "Core UI/UX Principles",
             duration: "14:30",
             videoUrl: "https://www.youtube.com/embed/SRec90j6lTY?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Chris Hemsworth",
@@ -501,7 +501,7 @@ export const coursesData: Course[] = [
             title: "Mastering Flexbox and Grid in Tailwind",
             duration: "25:10",
             videoUrl: "https://www.youtube.com/embed/SRec90j6lTY?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Gal Gadot",
@@ -518,7 +518,7 @@ export const coursesData: Course[] = [
             title: "Responsive Design Breakpoints",
             duration: "19:00",
             videoUrl: "https://www.youtube.com/embed/SRec90j6lTY?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Henry Cavill",
@@ -535,7 +535,7 @@ export const coursesData: Course[] = [
             title: "Typography and Color Palettes",
             duration: "16:20",
             videoUrl: "https://www.youtube.com/embed/UR2gYObu6CQ?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Zendaya Coleman",
@@ -551,7 +551,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Building Custom Components",
             duration: "30:00",
-            videoUrl:"https://www.youtube.com/embed/zg06ec5arCs?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/zg06ec5arCs?autoplay=1",
             completed: false,
             comments: [
               {
@@ -568,7 +568,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Tailwind CSS Quick Reference",
             fileSize: "3.5 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "c3-w1-7",
@@ -602,7 +602,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    overviewVideoUrl: "https://www.youtube.com/embed/w-7RQ46RgxU",
     description:
       "Build robust servers, connect MongoDB databases, and create professional RESTful APIs.",
     weeks: [
@@ -700,7 +700,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "Node.js Architecture Notes",
             fileSize: "2.1 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "c4-w1-7",
@@ -734,7 +734,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    overviewVideoUrl: "https://www.youtube.com/embed/Rl5xOuVirPU",
     description:
       "Master global state management and server state efficiently with minimal boilerplate.",
     weeks: [
@@ -748,7 +748,7 @@ export const coursesData: Course[] = [
             title: "When to use Redux vs Server State?",
             duration: "11:20",
             videoUrl: "https://www.youtube.com/embed/bpZzWDQXJdE?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Jeremy Renner",
@@ -765,7 +765,7 @@ export const coursesData: Course[] = [
             title: "Setting up Redux Toolkit Slices",
             duration: "22:00",
             videoUrl: "https://www.youtube.com/embed/5yEG6GhoJBs?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Elizabeth Olsen",
@@ -781,7 +781,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Async Thunks and API Calls",
             duration: "26:10",
-            videoUrl:"https://www.youtube.com/embed/bpZzWDQXJdE?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/bpZzWDQXJdE?autoplay=1",
             completed: false,
             comments: [
               {
@@ -815,7 +815,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Optimistic Updates & Mutations",
             duration: "31:00",
-            videoUrl:"https://www.youtube.com/embed/bpZzWDQXJdE?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/bpZzWDQXJdE?autoplay=1",
             completed: false,
             comments: [
               {
@@ -832,7 +832,7 @@ export const coursesData: Course[] = [
             type: "pdf",
             title: "State Management Decision Tree PDF",
             fileSize: "1.5 MB",
-            downloadUrl: "#",
+            downloadUrl: "/files/reactjsnotesforprofessionals.pdf",
           },
           {
             id: "c5-w1-7",
@@ -872,7 +872,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    overviewVideoUrl: "https://www.youtube.com/embed/Qmt0QwzEmh0",
     description:
       "Sharpen your algorithmic thinking and ace top tech company interviews successfully.",
     weeks: [
@@ -886,7 +886,7 @@ export const coursesData: Course[] = [
             title: "Understanding Big O Complexity",
             duration: "19:30",
             videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME?autoplay=1",
-            completed: true,
+            completed: false,
             comments: [
               {
                 name: "Benedict Cumberbatch",
@@ -919,7 +919,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Two Pointers Technique",
             duration: "27:15",
-           videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME?autoplay=1",
             completed: false,
             comments: [
               {
@@ -953,7 +953,7 @@ export const coursesData: Course[] = [
             type: "lesson",
             title: "Hash Maps and Frequency Counters",
             duration: "29:10",
-         videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME?autoplay=1",
+            videoUrl: "https://www.youtube.com/embed/0IAPZzGSbME?autoplay=1",
             completed: false,
             comments: [
               {
@@ -984,6 +984,7 @@ export const coursesData: Course[] = [
                   "What is the time complexity of binary search on a sorted array?",
                 options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
                 correctAnswer: 1,
+                pagenumber: 1,
               },
             ],
           },

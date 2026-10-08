@@ -5,11 +5,11 @@ type ModalProps = {
 
 export default function LeaderboardModal({ open, setOpen }: ModalProps) {
   const leaders = [
-    { rank: 1, name: "أحمد محمود", points: 1250, badge: "🥇" },
-    { rank: 2, name: "سارة خالد", points: 1100, badge: "🥈" },
-    { rank: 3, name: "محمد علي", points: 950, badge: "🥉" },
-    { rank: 4, name: "محمود حسن", points: 820, badge: "4" },
-    { rank: 5, name: "فاطمة عمر", points: 750, badge: "5" },
+    { rank: 1, name: "Ahmed Mahmoud", points: 1250, badge: "🥇" },
+    { rank: 2, name: "Sara Khaled", points: 1100, badge: "🥈" },
+    { rank: 3, name: "Mohamed Ali", points: 950, badge: "🥉" },
+    { rank: 4, name: "Mahmoud Hassan", points: 820, badge: "4" },
+    { rank: 5, name: "Fatma Omar", points: 750, badge: "5" },
   ];
 
   if (!open) return null;
@@ -17,10 +17,9 @@ export default function LeaderboardModal({ open, setOpen }: ModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-900">
-        {/* العنوان */}
         <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
           <h2 className="flex items-center gap-2 text-xl font-bold text-gray-800 dark:text-white">
-            🏆 لوحة المتصدرين
+            Leaderboard
           </h2>
           <button
             onClick={() => setOpen(false)}
@@ -45,14 +44,10 @@ export default function LeaderboardModal({ open, setOpen }: ModalProps) {
                 </span>
               </div>
               <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
-                {user.points} نقطة
+                {user.points} point
               </span>
             </div>
           ))}
-        </div>
-
-        <div className="mt-5 border-t border-gray-100 pt-3 text-center text-xs text-gray-500 dark:border-gray-800 dark:text-gray-400">
-          استمر في التفاعل وحل الدروس لتصعد إلى المراكز الأولى! 🚀
         </div>
       </div>
     </div>

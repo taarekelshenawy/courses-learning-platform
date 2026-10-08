@@ -11,7 +11,7 @@ type commentProps = {
 export const Comments = ({ commentsData, onAddComment }: commentProps) => {
   const [commentText, setCommentText] = useState("");
 
-  function AddComment(e) {
+  function AddComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!commentText.trim()) return;
     const newComment: Comment = {

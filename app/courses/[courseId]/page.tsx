@@ -11,7 +11,7 @@ export default async function page({
   const courseId = resolvedParams?.courseId;
 
   const currentCourse =
-    coursesData.find((c) => c.id === courseId) || coursesData[0];
+    coursesData.find((course) => course.id === courseId) || coursesData[0];
   return (
     <div>
       <div className="bg-custom-bg top-0 w-full px-5 py-3 max-sm:fixed max-sm:h-28">

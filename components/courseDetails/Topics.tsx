@@ -3,6 +3,8 @@ import { GiDialPadlock } from "react-icons/gi";
 import { LuStickyNote } from "react-icons/lu";
 import QuestionModal from "./QuestionModal";
 import { Course, Week, Question, WeekItem, Comment } from "@/types/courseTypes";
+import { updateCourseProgress } from "@/utils/helper/updateCourseProgress";
+import PdfModal from "./PdfModal";
 
 interface TopicsProps {
   weeksInfo: Week[];
@@ -23,50 +25,24 @@ export default function Topics({
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeQuizWeek, setActiveQuizWeek] = useState<number>(1);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [currentPdfUrl, setCurrentPdfUrl] = useState<string>("");
+  const [currentPdfTitle, setCurrentPdfTitle] = useState<string>("");
 
   const handleQuizComplete = (weekNumber: number, passed: boolean) => {
     if (!passed) return;
 
-    const currentCourse = course?.[0];
-    if (!currentCourse) return;
-
-    const updatedWeeks =
-      currentCourse.weeks?.map((week) => {
-        if (week.weekNumber === weekNumber) {
-          return {
-            ...week,
-            items: week.items.map((item) =>
-              item.type === "exam" ? { ...item, completed: true } : item
-            ),
-          };
-        }
-        return week;
-      }) || [];
-
-    let totalItemsCount = 0;
-    let completedItemsCount = 0;
-
-    updatedWeeks.forEach((week) => {
-      week.items.forEach((item) => {
-        totalItemsCount += 1;
-        if (item.completed) {
-          completedItemsCount += 1;
-        }
-      });
+    updateCourseProgress(course, setCourse, (week: Week) => {
+      if (week.weekNumber === weekNumber) {
+        return {
+          ...week,
+          items: week.items.map((item) =>
+            item.type === "exam" ? { ...item, completed: true } : item
+          ),
+        };
+      }
+      return week;
     });
-
-    const newProgress =
-      totalItemsCount > 0
-        ? Math.round((completedItemsCount / totalItemsCount) * 100)
-        : 0;
-
-    setCourse([
-      {
-        ...currentCourse,
-        weeks: updatedWeeks,
-        progress: newProgress,
-      },
-    ]);
   };
 
   const handleVideoClick = (
@@ -81,48 +57,18 @@ export default function Topics({
       setCurrentComments(comments || []);
     }
 
-    const currentCourse = course?.[0];
-    if (!currentCourse) return;
-
-    const updatedWeeks =
-      currentCourse.weeks?.map((week) => {
-        if (week.weekNumber === weekNumber) {
-          return {
-            ...week,
-            items: week.items.map((item) =>
-              item.id === itemId ? { ...item, completed: true } : item
-            ),
-          };
-        }
-        return week;
-      }) || [];
-
-    let totalItemsCount = 0;
-    let completedItemsCount = 0;
-
-    updatedWeeks.forEach((week) => {
-      week.items.forEach((item) => {
-        totalItemsCount += 1;
-        if (item.completed) {
-          completedItemsCount += 1;
-        }
-      });
+    updateCourseProgress(course, setCourse, (week: Week) => {
+      if (week.weekNumber === weekNumber) {
+        return {
+          ...week,
+          items: week.items.map((item) =>
+            item.id === itemId ? { ...item, completed: true } : item
+          ),
+        };
+      }
+      return week;
     });
-
-    const newProgress =
-      totalItemsCount > 0
-        ? Math.round((completedItemsCount / totalItemsCount) * 100)
-        : 0;
-
-    setCourse([
-      {
-        ...currentCourse,
-        weeks: updatedWeeks,
-        progress: newProgress,
-      },
-    ]);
   };
-
   return (
     <div>
       <div className="mb-16">
@@ -181,15 +127,16 @@ export default function Topics({
                           </div>
                         </div>
 
-                        <a
-                          href={lesson.downloadUrl}
-                          download
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 transition hover:bg-blue-100"
+                        <button
+                          onClick={() => {
+                            setCurrentPdfUrl(lesson.downloadUrl || "");
+                            setCurrentPdfTitle(lesson.title);
+                            setIsPdfModalOpen(true);
+                          }}
+                          className="flex cursor-pointer items-center gap-1 rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 transition hover:bg-blue-100"
                         >
-                          📥 تحميل PDF
-                        </a>
+                          show PDF
+                        </button>
                       </div>
                     ) : (
                       <div className="flex items-center gap-2">
@@ -256,6 +203,14 @@ export default function Topics({
           )}
         </div>
       ))}
+
+      {isPdfModalOpen && (
+        <PdfModal
+          currentPdfUrl={currentPdfUrl}
+          currentPdfTitle={currentPdfTitle}
+          setIsPdfModalOpen={setIsPdfModalOpen}
+        />
+      )}
     </div>
   );
 }

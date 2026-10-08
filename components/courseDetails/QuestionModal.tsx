@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Question } from "@/types/courseTypes";
-
-
+import { formatTime } from "@/utils/helper/formatTime";
 
 export default function QuestionModal({
   setShowModal,
@@ -54,17 +53,9 @@ export default function QuestionModal({
 
     setScore(calculatedScore);
 
-    // حساب هل نجح الطالب أم لا (مثلاً الشرط: الحصول على نصف الدرجة أو أكثر)
     const isPassed = calculatedScore >= Math.ceil(quizQuestions.length / 2);
 
-    // إرسال النتيجة للمكون الأب لتحديث الـ Progress
     onQuizComplete(weekNumber, isPassed);
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -80,7 +71,6 @@ export default function QuestionModal({
           {quizFinished ? "⏰ Time's up!" : `⏰ ${formatTime(timeLeft)}`}
         </div>
 
-        {/* أزرار الصفحات */}
         <div className="mb-3 flex items-center justify-center gap-3 font-bold text-white">
           {Array.from({
             length: Math.max(...quizQuestions.map((q) => q.pagenumber || 1)),
@@ -103,7 +93,7 @@ export default function QuestionModal({
           {quizFinished ? (
             <div className="py-6 text-center">
               <h2 className="mb-2 text-2xl font-bold text-blue-700">
-                انتهى الاختبار!
+                Quiz Finished!
               </h2>
               <p className="text-lg font-semibold text-gray-700">
                 نتيجتك هي: {score} من {quizQuestions.length}
@@ -112,8 +102,8 @@ export default function QuestionModal({
                 className={`mt-2 font-bold ${score! >= Math.ceil(quizQuestions.length / 2) ? "text-green-600" : "text-red-600"}`}
               >
                 {score! >= Math.ceil(quizQuestions.length / 2)
-                  ? "🎉 مبروك، لقد نجحت!"
-                  : "❌ عذراً، لم تنجح في الاختبار"}
+                  ? " Congratulations, you passed!"
+                  : " Sorry, you didn't pass the quiz."}
               </p>
               <button
                 onClick={() => setShowModal(false)}
@@ -151,7 +141,7 @@ export default function QuestionModal({
                 onClick={handleFinishQuiz}
                 className="mt-4 w-full cursor-pointer rounded-lg bg-green-600 py-2 font-bold text-white transition-colors hover:bg-green-700"
               >
-                إرسال الاختبار
+                Submit Quiz
               </button>
             </>
           )}

@@ -36,7 +36,6 @@ export default function CourseDetails() {
     setCurrentComments((prevComments) => [...prevComments, newComment]);
   };
 
-  // 1. دالة الـ Scroll الموحدة
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -50,18 +49,10 @@ export default function CourseDetails() {
         <div className="flex-2">
           <div className="top-0 max-sm:sticky">
             <iframe
-              key={
-                videoUpdated
-                  ? videoUpdated
-                  : course[0]?.weeks[0]?.items[0]?.videoUrl
-              }
+              key={videoUpdated ? videoUpdated : course[0]?.overviewVideoUrl}
               className="w-full max-sm:h-64"
               height="410"
-              src={
-                videoUpdated
-                  ? videoUpdated
-                  : course[0]?.weeks[0]?.items[0]?.videoUrl
-              }
+              src={videoUpdated ? videoUpdated : course[0]?.overviewVideoUrl}
               title="Frontend Performance - #1 Introduction بالعربي"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -70,7 +61,6 @@ export default function CourseDetails() {
             ></iframe>
           </div>
 
-          {/* 2. ربط الأيقونات بدالة السكرول */}
           <div className="mt-4 px-8">
             <ul className="flex items-center gap-3">
               <li>
@@ -113,7 +103,6 @@ export default function CourseDetails() {
 
           <CourseMaterial />
 
-          {/* 3. وضع الـ ID لقسم الـ Topics (المنهج) في الموبايل */}
           <div id="curriculum-section" className="mt-5 block px-2 lg:hidden">
             <Topics
               weeksInfo={course[0]?.weeks}
@@ -124,7 +113,6 @@ export default function CourseDetails() {
             />
           </div>
 
-          {/* 4. وضع الـ ID لقسم الـ Comments */}
           <div id="comments-section">
             <Comments
               commentsData={currentComments}
