@@ -47,7 +47,7 @@ export default function CourseDetails() {
     <>
       <div className="flex w-full gap-10 max-sm:mt-24 max-sm:flex-col sm:flex-col lg:flex-row">
         <div className="flex-2">
-          <div className="top-0 max-sm:sticky">
+          <div className="top-0 max-sm:sticky max-sm:mx-2">
             <iframe
               key={videoUpdated ? videoUpdated : course[0]?.overviewVideoUrl}
               className="w-full max-sm:h-64"
@@ -66,7 +66,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => scrollToSection("curriculum-section")}
-                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
                   src={Curriculum_icon}
                   alt="curriculum icon"
                 />
@@ -75,7 +75,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => scrollToSection("comments-section")}
-                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
                   src={comment_icon}
                   alt="comment icon"
                 />
@@ -84,7 +84,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => setOpenQuestionModal(true)}
-                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
                   src={Ask_question}
                   alt="ask question"
                 />
@@ -93,7 +93,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => setOpenLeaderboardModal(true)}
-                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
                   src={leaderboard}
                   alt="leaderboard"
                 />

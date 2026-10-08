@@ -17,11 +17,11 @@ export default function BreadCrumb({ breadcrumbData }: breadcrumbDataProps) {
         return (
           <div key={item.title} className="flex items-center gap-2">
             {isLast ? (
-              <p className="font-bold text-gray-500">{item.title}</p>
+              <p className="font-bold text-gray-600">{item.title}</p>
             ) : (
               <Link
                 href={item.label || "#"}
-                className="font-bold text-gray-500 hover:underline"
+                className="font-bold text-gray-600 hover:underline"
               >
                 {item.title}
               </Link>

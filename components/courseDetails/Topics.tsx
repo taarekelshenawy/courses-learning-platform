@@ -95,11 +95,11 @@ export default function Topics({
             <p className="text-2xl font-bold">
               Week {week.weekNumber}: {week.title}
             </p>
-            <p className="text-sm text-gray-400">this is week</p>
+           
           </div>
           <hr className="text-gray-300" />
 
-          <div className="text-gray-600">
+          <div className="text-gray-800 ">
             {week.items.map((lesson: WeekItem) => {
               const currentItemState = course?.[0]?.weeks
                 ?.find((w) => w.weekNumber === week.weekNumber)
