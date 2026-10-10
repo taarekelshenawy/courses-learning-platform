@@ -12,19 +12,26 @@ interface TopicsProps {
   course: Course[];
   setCourse: React.Dispatch<React.SetStateAction<Course[]>>;
   setCurrentComments: React.Dispatch<React.SetStateAction<Comment[]>>;
+  onVideoClick: (
+    weekNumber: number,
+    itemId: string,
+    videoUrl?: string,
+    comments?: Comment[]
+  ) => void;
+  activeVideoId: string | null;
 }
 
 export default function Topics({
   weeksInfo,
-  setVideo,
   course,
   setCourse,
-  setCurrentComments,
+  activeVideoId,
+
+  onVideoClick,
 }: TopicsProps) {
   const [openModal, setOpenModal] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeQuizWeek, setActiveQuizWeek] = useState<number>(1);
-  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
   const [currentPdfUrl, setCurrentPdfUrl] = useState<string>("");
   const [currentPdfTitle, setCurrentPdfTitle] = useState<string>("");
@@ -45,30 +52,6 @@ export default function Topics({
     });
   };
 
-  const handleVideoClick = (
-    weekNumber: number,
-    itemId: string,
-    videoUrl?: string,
-    comments?: Comment[]
-  ) => {
-    if (videoUrl) {
-      setVideo(videoUrl);
-      setActiveVideoId(itemId);
-      setCurrentComments(comments || []);
-    }
-
-    updateCourseProgress(course, setCourse, (week: Week) => {
-      if (week.weekNumber === weekNumber) {
-        return {
-          ...week,
-          items: week.items.map((item) =>
-            item.id === itemId ? { ...item, completed: true } : item
-          ),
-        };
-      }
-      return week;
-    });
-  };
   return (
     <div>
       <div className="mb-16">
@@ -95,11 +78,10 @@ export default function Topics({
             <p className="text-2xl font-bold">
               Week {week.weekNumber}: {week.title}
             </p>
-           
           </div>
           <hr className="text-gray-300" />
 
-          <div className="text-gray-800 ">
+          <div className="text-gray-800">
             {week.items.map((lesson: WeekItem) => {
               const currentItemState = course?.[0]?.weeks
                 ?.find((w) => w.weekNumber === week.weekNumber)
@@ -144,7 +126,7 @@ export default function Topics({
                         <span
                           className="cursor-pointer text-sm font-medium"
                           onClick={() =>
-                            handleVideoClick(
+                            onVideoClick(
                               week.weekNumber,
                               lesson.id,
                               lesson.videoUrl,

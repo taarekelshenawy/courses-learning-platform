@@ -59,7 +59,7 @@ export const coursesData: Course[] = [
     thumbnail:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
     progress: 0,
-    overviewVideoUrl: "https://www.youtube.com/embed/j942wKiXFu8",
+    overviewVideoUrl: "https://www.youtube.com/embed/qqqyUTTS-9g?autoplay=1",
     description:
       "Learn to build modern, responsive web applications using React, Hooks, and State Management.",
     weeks: [

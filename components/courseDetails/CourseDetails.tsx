@@ -14,7 +14,9 @@ import { useEffect, useState } from "react";
 import AskQuestionModal from "./AskQuesitonModal";
 import LeaderboardModal from "./LeaderboardModal";
 import { Course, Comment } from "@/types/courseTypes";
-
+import { updateCourseProgress } from "@/utils/helper/updateCourseProgress";
+import { Week } from "@/types/courseTypes";
+import ReactPlayer from "react-player";
 export default function CourseDetails() {
   const [course, setCourse] = useState<Course[]>([]);
   const { courseId } = useParams();
@@ -24,9 +26,9 @@ export default function CourseDetails() {
 
   const [openQuestionModal, setOpenQuestionModal] = useState(false);
   const [openLeaderboardModal, setOpenLeaderboardModal] = useState(false);
-
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [videoUpdated, setVideoUpdated] = useState("");
-
+  const [isPlaying, setIsPlaying] = useState(false);
   useEffect(() => {
     const courseInfo = coursesData.filter((item) => item.id === courseId);
     setCourse(courseInfo);
@@ -43,22 +45,76 @@ export default function CourseDetails() {
     }
   };
 
+  const handleVideoClick = (
+    weekNumber: number,
+    itemId: string,
+    videoUrl?: string,
+    comments?: Comment[]
+  ) => {
+    if (videoUrl) {
+      setVideoUpdated(videoUrl);
+      setActiveVideoId(itemId);
+      setCurrentComments(comments || []);
+      setIsPlaying(true);
+    }
+
+    updateCourseProgress(course, setCourse, (week: Week) => {
+      if (week.weekNumber === weekNumber) {
+        return {
+          ...week,
+          items: week.items.map((item) =>
+            item.id === itemId ? { ...item, completed: true } : item
+          ),
+        };
+      }
+      return week;
+    });
+  };
+
+  const handlePlayNext = () => {
+    setIsPlaying(false);
+    let foundCurrent = false;
+    let nextLesson: any = null;
+
+    for (const week of course[0].weeks) {
+      for (const item of week.items) {
+        if (foundCurrent && item.videoUrl) {
+          nextLesson = { weekNumber: week.weekNumber, item };
+          break;
+        }
+        if (item.id === activeVideoId) {
+          foundCurrent = true;
+        }
+      }
+      if (nextLesson) break;
+    }
+
+    if (nextLesson) {
+      handleVideoClick(
+        nextLesson.weekNumber,
+        nextLesson.item.id,
+        nextLesson.item.videoUrl,
+        nextLesson.item.comments
+      );
+    }
+  };
+
   return (
     <>
       <div className="flex w-full gap-10 max-sm:mt-24 max-sm:flex-col sm:flex-col lg:flex-row">
         <div className="flex-2">
           <div className="top-0 max-sm:sticky max-sm:mx-2">
-            <iframe
-              key={videoUpdated ? videoUpdated : course[0]?.overviewVideoUrl}
-              className="w-full max-sm:h-64"
-              height="410"
-              src={videoUpdated ? videoUpdated : course[0]?.overviewVideoUrl}
-              title="Frontend Performance - #1 Introduction بالعربي"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+            <div className="h-[410px] w-full max-sm:h-64">
+              <ReactPlayer
+                key={videoUpdated || course[0]?.overviewVideoUrl}
+                src={videoUpdated || course[0]?.overviewVideoUrl}
+                width="100%"
+                height="100%"
+                controls
+                playing={isPlaying}
+                onEnded={handlePlayNext}
+              />
+            </div>
           </div>
 
           <div className="mt-4 px-8">
@@ -66,7 +122,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => scrollToSection("curriculum-section")}
-                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400 max-sm:h-10 max-sm:w-10"
                   src={Curriculum_icon}
                   alt="curriculum icon"
                 />
@@ -75,7 +131,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => scrollToSection("comments-section")}
-                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400 max-sm:h-10 max-sm:w-10"
                   src={comment_icon}
                   alt="comment icon"
                 />
@@ -84,7 +140,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => setOpenQuestionModal(true)}
-                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400 max-sm:h-10 max-sm:w-10"
                   src={Ask_question}
                   alt="ask question"
                 />
@@ -93,7 +149,7 @@ export default function CourseDetails() {
               <li>
                 <Image
                   onClick={() => setOpenLeaderboardModal(true)}
-                  className="h-12 w-12 max-sm:h-10 max-sm:w-10 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400"
+                  className="h-12 w-12 cursor-pointer rounded-full p-2 hover:border-2 hover:bg-gray-400 max-sm:h-10 max-sm:w-10"
                   src={leaderboard}
                   alt="leaderboard"
                 />
@@ -110,6 +166,8 @@ export default function CourseDetails() {
               course={course}
               setCourse={setCourse}
               setCurrentComments={setCurrentComments}
+              onVideoClick={handleVideoClick}
+              activeVideoId={activeVideoId}
             />
           </div>
 
@@ -128,6 +186,8 @@ export default function CourseDetails() {
             course={course}
             setCourse={setCourse}
             setCurrentComments={setCurrentComments}
+            onVideoClick={handleVideoClick}
+            activeVideoId={activeVideoId}
           />
         </div>
         {openQuestionModal ? (

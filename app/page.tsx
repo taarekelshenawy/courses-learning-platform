@@ -8,7 +8,7 @@ export default function Home() {
           <h1 className="text-3xl font-bold max-sm:text-2xl">
             Explore Our Courses
           </h1>
-          <p className="text-gray-400">
+          <p className="font-bold text-gray-500">
             Enhance your skills with our professional online courses and
             hands-on projects.
           </p>
